@@ -36,10 +36,24 @@ const commands = {
 
   // Command to add entity and properties of it in the main file
   add: (res) => {
-    checkFilesExist(add_commands.hasOwnProperty(res.split(' ')[1]) ? add_commands[res.split(' ')[1]](res) : add_commands['default'](res));
+    checkFilesExist(() => add_commands.hasOwnProperty(res.split(' ')[1]) ? add_commands[res.split(' ')[1]](res) : add_commands['default'](res));
   },
 
-  clear: () => { },
+  clear: () => {
+    checkFilesExist(() =>
+      readline.question(output_messages.clear_backup, async (res) => {
+        if (res.toLowerCase() !== 'n') {
+          await fs.copyFile('entities.js', 'entities.backup.js', (err) => err && console.log(err));
+          readline.write(output_messages.clear_backup_created);
+        }
+
+        fs.writeFile('entities.js', boilerplate_entities, () => {
+          readline.write(output_messages.cleared);
+          readline.close();
+        });
+      })
+    )
+  },
 
   // Command to generate the data
   generate: () => {
@@ -111,5 +125,5 @@ const checkFilesExist = (callback) => {
   }
 
   // check if entities file exist
-  fs.exists('entities.js', (exists) => !(exists) ? missing_archive(output_messages.missing_entities) : callback);
+  fs.exists('entities.js', (exists) => !exists ? missing_archive(output_messages.missing_entities) : callback());
 }

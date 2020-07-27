@@ -56,6 +56,13 @@ module.exports = output_messages = {
   > add \x1b[1mproperty\x1b[0m
 
 `,
+  clear_backup: `
+Do you want me to make a \x1b[1mbackup\x1b[0m of your entities? \x1b[1m(Y/n)\x1b[0m`,
+  clear_backup_created: `
+> \x1b[33mentities.backup.js\x1b[1m \x1b[32mcreated\x1b[0m as \x1b[1mbackup!\x1b[0m
+`,
+  cleared: `\x1b[32mcleared!\x1b[0m
+  `,
   generate: `
   \x1b[32m\x1b[1mGenerating data...\x1b[0m`,
   generate_complete: `
