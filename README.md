@@ -21,8 +21,8 @@
 - Manualy add Entities and it Properties ✔️
 - Generate data ✔️
 - Ready to use! (with CLI but manualy too) ✔️
-- Clear (creating backup for default) ❌🔨
-- Add Enties and Properties through the CLI ❌
+- Clear (creating backup for default) ✔️
+- Add Enties and Properties through the CLI ❌🔨
 - Up to NPM ❌
 - Random name and text generators ❌
 - IA To link generation name with the property name! ❌
