@@ -1,4 +1,4 @@
-const fs = require('fs');
+module.exports = boilerplate = `const fs = require('fs');
 
 // Example of property that goes in the 'database' variable
 // 
@@ -76,3 +76,5 @@ const generate = async () => {
 
 // run 
 generate();
+
+`;
