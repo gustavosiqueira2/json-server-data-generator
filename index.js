@@ -9,7 +9,6 @@ const output_messages = require('./output_messages');
 const fs = require('fs');
 
 // Load boilerplate code
-const boilerplate = require('./boilerplate');
 const boilerplate_entities = require('./boilerplate_entities');
 
 // Start the Script 
@@ -27,37 +26,29 @@ const commands = {
       readline.close();
     }
 
-    fs.exists('generate.js', (exists) => exists ? override_detected() :
-      fs.exists('entities.js', (exists) => exists ? override_detected() :
-        // Creating the boilerplate core file
-        fs.writeFile('generate.js', boilerplate, 'utf8', () =>
-          // Creating the boilerplate entities file
-          fs.writeFile('entities.js', boilerplate_entities, () => {
-            readline.write(output_messages.boilerplate_starterd);
-            readline.question(output_messages.run_add, (res) => commands.hasOwnProperty(res) ? commands[res](res) : commands['default'](res))
-          }))));
+    fs.exists('entities.js', (exists) => exists ? override_detected() :
+      // Creating the boilerplate entities file
+      fs.writeFile('entities.js', boilerplate_entities, () => {
+        readline.write(output_messages.boilerplate_starterd);
+        readline.question(output_messages.run_add, (res) => commands.hasOwnProperty(res) ? commands[res](res) : commands['default'](res))
+      }));
   },
 
   // Command to add entity and properties of it in the main file
   add: (res) => {
-    // check if core file exist
-    fs.exists('generate.js', (exists) => {
-      if (!exists) {
-        readline.write(output_messages.missing_generate);
-        readline.close();
-      }
-      else
-        // check if entities file exist
-        fs.exists('entities.js', (exists) => {
-          if (!exists) {
-            readline.write(output_messages.missing_entities);
-            readline.close();
-          }
-          else
-            // Run add commands
-            add_commands.hasOwnProperty(res.split(' ')[1]) ? add_commands[res.split(' ')[1]](res) : add_commands['default'](res);
-        })
-    });
+    checkFilesExist(add_commands.hasOwnProperty(res.split(' ')[1]) ? add_commands[res.split(' ')[1]](res) : add_commands['default'](res));
+  },
+
+  clear: () => { },
+
+  // Command to generate the data
+  generate: () => {
+    readline.write(output_messages.generate);
+    const generate = require('./generate');
+    generate().then(() => {
+      readline.write(output_messages.generate_complete);
+      readline.close();
+    }).catch((e) => console.log(e));
   },
 
   // Command to show all the commands of the CLI
@@ -66,7 +57,7 @@ const commands = {
     Object.keys(commands).forEach((command) => command !== 'default' && (commandsString += output_messages.help_commands(command)));
 
     readline.write(output_messages.help_command_string(commandsString));
-    readline.close();
+    readline.question('', (res) => commands.hasOwnProperty(res) ? commands[res](res) : commands['default'](res));
   },
 
   // Default () => Triggered when user inputs a non-expected value in the console
@@ -88,10 +79,9 @@ const add_commands = {
     if (res.split(' ').length != 4)
       readline.write(output_messages.add_missing_parameters);
     else {
-      // Adding entity to the file
-      readline.write(`    
-  \x1b[1mEntity added!\x1b[0m
-`);
+      fs.readFile('entities.js', (res) => {
+        console.log(res)
+      });
     }
   },
 
@@ -100,12 +90,26 @@ const add_commands = {
 
   // Default () => Triggered when add commands dont match neither with entity or property
   default: (res) => {
-    if (res.split(' ')[1])
+    if (res.split(' ')[1]) {
       readline.write(output_messages.add_unrecognized_command(res));
-    else
-      readline.write();
+      readline.close();
+    }
+    else {
+      readline.write(output_messages.add_commands);
+      readline.question('', (res) => commands.hasOwnProperty(res) ? commands[res](res) : commands['default'](res))
+    }
 
+  }
+
+}
+
+// Function to check if files exist
+const checkFilesExist = (callback) => {
+  const missing_archive = (message) => {
+    readline.write(message);
     readline.close();
   }
 
+  // check if entities file exist
+  fs.exists('entities.js', (exists) => !(exists) ? missing_archive(output_messages.missing_entities) : callback);
 }

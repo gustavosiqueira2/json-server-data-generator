@@ -11,9 +11,9 @@
 ## ⚡ Even Faster!
 
 - Fast CLI for help
-- Fast implemetantion of new entities
-- Ultra perfomance on generation
-- Ready to use!
+- Fast implemetantion of new entities and properties
+- Ultra perfomance on generation and use!
+- Setup > Run > Server UP :)
 
 ## 🔨 Actual State
 
@@ -21,9 +21,11 @@
 - Manualy add Entities and it Properties ✔️
 - Generate data ✔️
 - Ready to use! (with CLI but manualy too) ✔️
-- Add Enties and Properties through the CLI ❌🔨
-- Clear (creating backup for default) ❌
+- Clear (creating backup for default) ❌🔨
+- Add Enties and Properties through the CLI ❌
 - Up to NPM ❌
+- Random name and text generators ❌
+- IA To link generation name with the property name! ❌
 
 ---
 
@@ -83,9 +85,8 @@
 
 ---
 
-## Contributing
+## 😉 Contributing
 
-Wanna help? You can send mensages to me on gustavo.fariassiqueira@gmail.com
+Wanna help? You can send mensages to me on my email!
 
-
-<!-- [![npm package](https://img.shields.io/npm/v/@react-native-community/status-bar.svg)](https://www.npmjs.org/package/@react-native-community/status-bar) -->
+[![Gmail Badge](https://img.shields.io/badge/-gustavo.fariassiqueira@gmail.com-c14438?style=flat-square&logo=Gmail&logoColor=white&link=mailto:gustavo.fariassiqueira@gmail.com)](mailto:gustavo.fariassiqueira@gmail.com)

@@ -1,4 +1,4 @@
-module.exports = boilerplate = `const fs = require('fs');
+const fs = require('fs');
 
 // Carry the information to generate data and the data it self
 let database = require('./entities');
@@ -43,7 +43,7 @@ function createObject(object, objectName) {
 }
 
 // Generate the data base
-const generate = async () => {
+module.exports = generate = async () => {
 
   // variable that keep the final json
   const data = {};
@@ -61,8 +61,3 @@ const generate = async () => {
   fs.writeFile('server.json', JSON.stringify(data), 'utf8', () => { });
 
 }
-
-// run 
-generate();
-
-`;
