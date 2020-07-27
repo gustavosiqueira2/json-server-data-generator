@@ -15,6 +15,13 @@
 - Ultra perfomance on generation
 - Ready to use!
 
+## 🔨 Actual State
+
+- Generate Boilerplate ✔️
+- Manualy add Entities and it Properties ✔️
+- Generate data ✔️
+- Ready to use! (with CLI) ✔️
+- Add Enties and Properties through the CLI ❌🔨
 
 ## Contributing
 

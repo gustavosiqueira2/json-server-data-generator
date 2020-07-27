@@ -1,19 +1,7 @@
 module.exports = boilerplate = `const fs = require('fs');
 
-// Example of property that goes in the 'database' variable
-// 
-// user: {
-//   array: [],
-//   quantity: 3,
-//   obj: {
-//     id: 'number',
-//     name: 'string',
-//     description: 'string'
-//   }
-// }
-
 // Carry the information to generate data and the data it self
-let database = {}
+let database = require('./entities');
 
 // Generate data for specific entity of the database
 function generateRows(clas, objectName) {
