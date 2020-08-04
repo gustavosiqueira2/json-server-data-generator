@@ -1,6 +1,14 @@
-module.exports = boilerplate_entities = `// Example of property that goes in the 'database' variable
+module.exports = boilerplate_entities = (entities = {}) => {
+
+  let entitiesString = Object.keys(entities).map((key) => 'let ' + key + ' = ' + JSON.stringify(entities[key]) + '\n').join('');
+
+  let entitiesNameString = Object.keys(entities).forEach((key) =>  '' + key + ',\n');
+
+  console.log(entitiesNameString)
+
+  return `// Example of property that goes in the 'database' variable
 // 
-// user: {
+// const user: {
 //   array: [],
 //   quantity: 3,
 //   obj: {
@@ -9,7 +17,13 @@ module.exports = boilerplate_entities = `// Example of property that goes in the
 //     description: 'string'
 //   }
 // }
-
-module.exports = {};
+  
+${entitiesString}
+  
+module.exports = {
+${entitiesNameString}
+};
 
 `;
+
+}

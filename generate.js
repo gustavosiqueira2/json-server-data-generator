@@ -43,7 +43,7 @@ function createObject(object, objectName) {
 }
 
 // Generate the data base
-module.exports = generate = async () => {
+const generate = async () => {
 
   // variable that keep the final json
   const data = {};
@@ -61,3 +61,5 @@ module.exports = generate = async () => {
   fs.writeFile('server.json', JSON.stringify(data), 'utf8', () => { });
 
 }
+
+module.exports = generate;

@@ -28,7 +28,7 @@ const commands = {
 
     fs.exists('entities.js', (exists) => exists ? override_detected() :
       // Creating the boilerplate entities file
-      fs.writeFile('entities.js', boilerplate_entities, () => {
+      fs.writeFile('entities.js', boilerplate_entities(), () => {
         readline.write(output_messages.boilerplate_starterd);
         readline.question(output_messages.run_add, (res) => commands.hasOwnProperty(res) ? commands[res](res) : commands['default'](res))
       }));
@@ -47,7 +47,7 @@ const commands = {
           readline.write(output_messages.clear_backup_created);
         }
 
-        fs.writeFile('entities.js', boilerplate_entities, () => {
+        fs.writeFile('entities.js', boilerplate_entities(), () => {
           readline.write(output_messages.cleared);
           readline.close();
         });
@@ -57,12 +57,16 @@ const commands = {
 
   // Command to generate the data
   generate: () => {
+
     readline.write(output_messages.generate);
+
     const generate = require('./generate');
+
     generate().then(() => {
       readline.write(output_messages.generate_complete);
       readline.close();
     }).catch((e) => console.log(e));
+
   },
 
   // Command to show all the commands of the CLI
@@ -90,12 +94,20 @@ const add_commands = {
 
   // Command for add entity
   entity: (res) => {
-    if (res.split(' ').length != 4)
+
+    if (res.split(' ').length !== 4)
       readline.write(output_messages.add_missing_parameters);
     else {
-      fs.readFile('entities.js', (res) => {
-        console.log(res)
+      const [, , entity, quantity] = res.split(' ');
+      const entities = require('./entities');
+
+      fs.writeFile('entitiessss.js', boilerplate_entities(entities), () => {
       });
+      // if (entities.hasOwnProperty(entity)) {
+      //   entities[entity].quantity = 42
+      // }
+      // else {
+      // }
     }
   },
 

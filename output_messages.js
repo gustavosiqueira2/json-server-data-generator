@@ -18,7 +18,7 @@ module.exports = output_messages = {
 `,
   override_warning: `
   \x1b[31mData Generator detect!\x1b[0m
-  you can override the entities in this scope.
+  you cant override the entities in this scope, if you wanna to reset entities, run \x1b[1mclear\x1b[0m.
 `,
   missing_generate: `
   \x1b[31mData Generator isn't started yet!\x1b[0m
@@ -48,6 +48,7 @@ module.exports = output_messages = {
   Add commands:
   > add entity
   > add property
+  
 `,
   add_commands: `
   \x1b[34m\x1b[1mAdd commands:\x1b[0m
