@@ -40,19 +40,23 @@ module.exports = output_messages = {
   \x1b[31mMiss parameters\x1b[0m in command
 
   \x1b[1mAdd entity command\x1b[0m: add entity \x1b[1m'entity name' 'desired quantity of rows'\x1b[0m
-  \x1b[32mExample:\x1b[0m \x1b[1madd entity User 5\x1b[0m
-
-`,
+  \x1b[32mExample:\x1b[0m \x1b[1madd entity User 5\x1b[0m`,
   add_property_missing_parameters: `
   \x1b[31mMiss parameters\x1b[0m in command
 
   \x1b[1mAdd property command\x1b[0m: add property \x1b[1m'entity name'\x1b[0m
-  \x1b[32mExample:\x1b[0m \x1b[1madd property User \x1b[0m
-
-`,
+  \x1b[32mExample:\x1b[0m \x1b[1madd property User \x1b[0m`,
   entity_already_exist: `
   Entity Alreadt exist
 `,
+  entity_doesnt_exist: `
+  Entity Doesn't exist`,
+  add_properties: (entity, propertiesString) => `
+  Entity ${entity} context
+  Properties: "name" "type"(string | number)
+  ${propertiesString}
+  
+  `,
   add_unrecognized_command: (res) => `
   \x1b[31mUnrecognized\x1b[0m command \x1b[1m\x1b[4madd ${res.split(' ')[1]}\x1b[0m
   Add commands:

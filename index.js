@@ -12,7 +12,7 @@ const fs = require('fs');
 const boilerplate_entities = require('./boilerplate_entities');
 
 // Start the Script 
-readline.question(output_messages.presentation, (res) => commands.hasOwnProperty(res) ? commands[res](res) : commands['default'](res));
+readline.question(output_messages.presentation, (res) => commands.hasOwnProperty(res.trim()) ? commands[res](res.trim()) : commands['default'](res.trim()));
 // run the commands
 
 // Commands
@@ -31,13 +31,13 @@ const commands = {
       // Creating the boilerplate entities file
       fs.writeFile('entities.js', boilerplate_entities(), () => {
         readline.write(output_messages.boilerplate_starterd);
-        readline.question(output_messages.run_add, (res) => commands.hasOwnProperty(res) ? commands[res](res) : commands['default'](res))
+        readline.question(output_messages.run_add, (res) => commands.hasOwnProperty(res.trim()) ? commands[res](res.trim()) : commands['default'](res.trim()))
       }));
   },
 
   // Command to add entity and properties of it in the main file
   add: (res) => {
-    checkFilesExist(() => add_commands.hasOwnProperty(res.split(' ')[1]) ? add_commands[res.split(' ')[1]](res) : add_commands['default'](res));
+    checkFilesExist(() => add_commands.hasOwnProperty(res.trim().split(' ')[1]) ? add_commands[res.split(' ')[1]](res.trim()) : add_commands['default'](res.trim()));
   },
 
   c: () => commands['clear'](),
@@ -77,7 +77,7 @@ const commands = {
     Object.keys(commands).forEach((command) => command !== 'default' && (commandsString += output_messages.help_commands(command)));
 
     readline.write(output_messages.help_command_string(commandsString));
-    readline.question('', (res) => commands.hasOwnProperty(res) ? commands[res](res) : commands['default'](res));
+    readline.question('', (res) => commands.hasOwnProperty(res.trim()) ? commands[res](res.trim()) : commands['default'](res.trim()));
   },
 
   // Default () => Triggered when user inputs a non-expected value in the console
@@ -95,51 +95,51 @@ const commands = {
 const add_commands = {
 
   // Command for add entity
-  e: (res) => add_commands['entity'](res),
+  e: (res) => add_commands['entity'](res.trim()),
   entity: (res) => {
 
     // Check if params are correct
-    if (res.split(' ').length !== 4) {
-      readline.write(output_messages.add_entity_missing_parameters);
-      readline.close();
-    }
-    else {
-      const [, , entity, quantity] = res.split(' ');
-      const entities = require('./entities');
+    if (res.split(' ').length !== 4) return console.log(output_messages.add_entity_missing_parameters);
 
+    const [, , entity, quantity] = res.split(' ');
+    const entities = require('./entities');
 
-      // If quantity is not a number
-      if (isNaN(Number(quantity))) return console.log(quantity + ' is not a number!');
+    // If quantity is not a number
+    if (isNaN(Number(quantity))) return console.log(quantity + ' is not a number!');
 
-      // If entity already exist in entities
-      if (entities.hasOwnProperty(entity)) return console.log(output_messages.entity_already_exist);
+    // If entity already exist in entities
+    if (entities.hasOwnProperty(entity)) return console.log(output_messages.entity_already_exist);
 
-      // Add entity to entities
-      entities[entity] = { array: [], quantity, obj: {} }
+    // Add entity to entities
+    entities[entity] = { array: [], quantity, obj: {} }
 
-      // Update File
-      fs.writeFile('entities.js', boilerplate_entities(entities), (err) => {
+    // Update File
+    fs.writeFile('entities.js', boilerplate_entities(entities), (err) => {
 
-        err && console.log(err);
+      err && console.log(err);
 
-        add_commands['property'](['', '', entity, quantity]);
+      add_commands['property']('add property ' + entity);
 
-      });
-    }
+    });
   },
 
   // Command for add property
-  p: (res) => add_commands['property'](res),
+  p: (res) => add_commands['property'](res.trim()),
   property: (res) => {
-    
-    // Check if params are correct
-    if (res.split(' ').length !== 3) {
-      readline.write(output_messages.add_property_missing_parameters);
-      readline.close();
-    }
-    else {
 
-    }
+    // Check if params are correct
+    if (res.split(' ').length !== 3) return console.log(output_messages.add_property_missing_parameters);
+
+    const [, , entity] = res.split(' ');
+    const entities = require('./entities');
+
+    // If entity already exist in entities
+    if (!entities.hasOwnProperty(entity)) return console.log(output_messages.entity_doesnt_exist);
+
+    const propertiesString = Object.entries(entities[entity].obj).map((property) => `\n  ${property[0]}: ${property[1]}`);
+
+    readline.write(output_messages.add_properties(entity, propertiesString));
+
   },
 
   // Default () => Triggered when add commands dont match neither with entity or property
@@ -150,7 +150,7 @@ const add_commands = {
     }
     else {
       readline.write(output_messages.add_commands);
-      readline.question('', (res) => commands.hasOwnProperty(res) ? commands[res](res) : commands['default'](res))
+      readline.question('', (res) => commands.hasOwnProperty(res.trim()) ? commands[res](res.trim()) : commands['default'](res.trim()))
     }
 
   }
@@ -159,7 +159,7 @@ const add_commands = {
 
 // Function to check if files exist
 const checkFilesExist = (callback) => {
-  
+
   const missing_archive = (message) => {
     readline.write(message);
     readline.close();
