@@ -36,11 +36,18 @@ module.exports = output_messages = {
   \x1b[31mUnrecognized\x1b[0m command
   type  \x1b[1m\x1b[4mhelp\x1b[0m, if you wanna see the list of the commands
 `,
-  add_missing_parameters: `
+  add_entity_missing_parameters: `
   \x1b[31mMiss parameters\x1b[0m in command
 
   \x1b[1mAdd entity command\x1b[0m: add entity \x1b[1m'entity name' 'desired quantity of rows'\x1b[0m
-  \x1b[32mExample:\x1b[0m \x1b[1madd entity Users 5\x1b[0m
+  \x1b[32mExample:\x1b[0m \x1b[1madd entity User 5\x1b[0m
+
+`,
+  add_property_missing_parameters: `
+  \x1b[31mMiss parameters\x1b[0m in command
+
+  \x1b[1mAdd property command\x1b[0m: add property \x1b[1m'entity name'\x1b[0m
+  \x1b[32mExample:\x1b[0m \x1b[1madd property User \x1b[0m
 
 `,
   entity_already_exist: `

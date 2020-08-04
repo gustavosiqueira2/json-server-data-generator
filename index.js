@@ -19,6 +19,7 @@ readline.question(output_messages.presentation, (res) => commands.hasOwnProperty
 const commands = {
 
   // Command for create the boilerplate that is needed to run the rest of the CLI commmands
+  s: () => commands['start'](),
   start: () => {
     // Check if is aready started for no override
     const override_detected = () => {
@@ -39,6 +40,7 @@ const commands = {
     checkFilesExist(() => add_commands.hasOwnProperty(res.split(' ')[1]) ? add_commands[res.split(' ')[1]](res) : add_commands['default'](res));
   },
 
+  c: () => commands['clear'](),
   clear: () => {
     checkFilesExist(() =>
       readline.question(output_messages.clear_backup, async (res) => {
@@ -93,10 +95,14 @@ const commands = {
 const add_commands = {
 
   // Command for add entity
+  e: (res) => add_commands['entity'](res),
   entity: (res) => {
 
-    if (res.split(' ').length !== 4)
-      readline.write(output_messages.add_missing_parameters);
+    // Check if params are correct
+    if (res.split(' ').length !== 4) {
+      readline.write(output_messages.add_entity_missing_parameters);
+      readline.close();
+    }
     else {
       const [, , entity, quantity] = res.split(' ');
       const entities = require('./entities');
@@ -108,14 +114,32 @@ const add_commands = {
       // If entity already exist in entities
       if (entities.hasOwnProperty(entity)) return console.log(output_messages.entity_already_exist);
 
+      // Add entity to entities
       entities[entity] = { array: [], quantity, obj: {} }
-      fs.writeFile('entities_test.js', boilerplate_entities(entities), (err) => err && console.log(err));
+
+      // Update File
+      fs.writeFile('entities.js', boilerplate_entities(entities), (err) => {
+
+        err && console.log(err);
+
+        add_commands['property'](['', '', entity, quantity]);
+
+      });
     }
   },
 
   // Command for add property
+  p: (res) => add_commands['property'](res),
   property: (res) => {
+    
+    // Check if params are correct
+    if (res.split(' ').length !== 3) {
+      readline.write(output_messages.add_property_missing_parameters);
+      readline.close();
+    }
+    else {
 
+    }
   },
 
   // Default () => Triggered when add commands dont match neither with entity or property
@@ -135,6 +159,7 @@ const add_commands = {
 
 // Function to check if files exist
 const checkFilesExist = (callback) => {
+  
   const missing_archive = (message) => {
     readline.write(message);
     readline.close();
