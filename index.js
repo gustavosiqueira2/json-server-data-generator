@@ -101,18 +101,22 @@ const add_commands = {
       const [, , entity, quantity] = res.split(' ');
       const entities = require('./entities');
 
-      fs.writeFile('entitiessss.js', boilerplate_entities(entities), () => {
-      });
-      // if (entities.hasOwnProperty(entity)) {
-      //   entities[entity].quantity = 42
-      // }
-      // else {
-      // }
+
+      // If quantity is not a number
+      if (isNaN(Number(quantity))) return console.log(quantity + ' is not a number!');
+
+      // If entity already exist in entities
+      if (entities.hasOwnProperty(entity)) return console.log(output_messages.entity_already_exist);
+
+      entities[entity] = { array: [], quantity, obj: {} }
+      fs.writeFile('entities_test.js', boilerplate_entities(entities), (err) => err && console.log(err));
     }
   },
 
   // Command for add property
-  property: (res) => { },
+  property: (res) => {
+
+  },
 
   // Default () => Triggered when add commands dont match neither with entity or property
   default: (res) => {

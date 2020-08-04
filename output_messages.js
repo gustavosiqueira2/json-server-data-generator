@@ -43,6 +43,9 @@ module.exports = output_messages = {
   \x1b[32mExample:\x1b[0m \x1b[1madd entity Users 5\x1b[0m
 
 `,
+  entity_already_exist: `
+  Entity Alreadt exist
+`,
   add_unrecognized_command: (res) => `
   \x1b[31mUnrecognized\x1b[0m command \x1b[1m\x1b[4madd ${res.split(' ')[1]}\x1b[0m
   Add commands:
