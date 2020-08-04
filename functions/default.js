@@ -1,9 +1,7 @@
-module.exports = ({ readline, output_messages, commands }) => (res) => {
+module.exports = ({ readline, output_messages }) => () => {
 
-  if (res.split(' ')[0] === 'add') commands['add'](res);
+  readline.write(output_messages.unrecognized_command)
 
-  else readline.write(output_messages.unrecognized_command);
-
-  readline.close();
+  readline.close()
 
 }

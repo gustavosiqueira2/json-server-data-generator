@@ -1,30 +1,30 @@
-const readlineimport = require('readline');
-const readline = readlineimport.createInterface({ input: process.stdin, output: process.stdout });
+const readlineimport = require('readline')
+const readline = readlineimport.createInterface({ input: process.stdin, output: process.stdout })
 
-const fs = require('fs');
+const fs = require('fs')
 
-const output_messages = require('./output_messages');
+const output_messages = require('./output_messages')
 
-const boilerplate_entities = require('./boilerplate_entities');
+const boilerplate_entities = require('./boilerplate_entities')
 
-const checkFilesExist = (callback) => {
-  fs.exists('entities.js', (exists) => !exists ? console.log(output_messages.missing_entities) : callback());
-}
+const checkFilesExist = (callback) =>
+  fs.exists('entities.js', (exists) =>
+    !exists ? console.log(output_messages.missing_entities) : callback())
 
-const start = require('./functions/start');
-const clear = require('./functions/clear');
-const generate = require('./functions/generate');
-const help = require('./functions/help');
-const defaultCommandRes = require('./functions/default');
+const start = require('./functions/start')
+const clear = require('./functions/clear')
+const generate = require('./functions/generate')
+const help = require('./functions/help')
+const defaultCommandRes = require('./functions/default')
 
-const entity = require('./functions/add/entity');
-const property = require('./functions/add/property');
-const defaultAddCommandRes = require('./functions/add/default');
+const entity = require('./functions/add/entity')
+const property = require('./functions/add/property')
+const defaultAddCommandRes = require('./functions/add/default')
 
 
 const commands = (cmd) => {
 
-  const [command, param] = cmd.split(' ');
+  const [command, param] = cmd.split(' ')
 
   const params = {
     fs,
@@ -66,25 +66,25 @@ const commands = (cmd) => {
 
       checkFilesExist(() => {
         switch (param) {
-  
+
           case 'e':
           case 'entity': {
             entity(params)(cmd)
             break
-          }  
+          }
           case 'p':
           case 'property': {
             property(params)(cmd)
             break
-          }  
+          }
           default: {
             defaultAddCommandRes(params)(cmd)
             break
           }
-  
+
         }
       })
-      
+
       break
     }
 
@@ -96,4 +96,4 @@ const commands = (cmd) => {
   }
 }
 
-readline.question(output_messages.presentation, (res) => commands(res.trim()));
+readline.question(output_messages.presentation, (res) => commands(res.trim()))

@@ -31,8 +31,7 @@ module.exports = output_messages = {
   please run start to create the boilerplate code to start use data-generator
 
   missing entities.js file!`,
-  unrecognized_command: `
-  \x1b[31mUnrecognized\x1b[0m command
+  unrecognized_command: `  \x1b[31mUnrecognized\x1b[0m command
   type \x1b[1m\x1b[4mhelp\x1b[0m, if you wanna see the list of the commands
 `,
   add_entity_missing_parameters: `
