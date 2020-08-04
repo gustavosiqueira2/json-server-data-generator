@@ -17,16 +17,14 @@
 
 ## 🔨 Actual State
 
-- Generate Entities Boilerplate ✔️
+- Ready to use! (with CLI) ✔️
 - Manualy add Entities and it Properties ✔️
-- Generate data ✔️
-- Ready to use! (with CLI but manualy too) ✔️
+- Add Enties and Properties through the CLI ✔️
 - Clear (creating backup for default) ✔️
-- Add Enties through the CLI ✔️
-- Add Properties through the CLI ❌🔨
-- Edit/Remove Properties through the CLI ❌
-- Up to NPM ❌
+- Generate, create data for server ✔️
+- Up to NPM ❌🔨
 - Random types generators ❌
+- Edit / Remove Properties through the CLI ❌
 - IA To link generation name with the property name! ❌
 
 ---

@@ -12,7 +12,7 @@ module.exports = ({ fs, readline, output_messages, boilerplate_entities, command
 
       readline.write(output_messages.boilerplate_starterd);
 
-      readline.question(output_messages.run_add, (res) => commands.hasOwnProperty(res.trim()) ? commands[res.trim()](res.trim()) : commands['default'](res.trim()));
+      readline.question(output_messages.run_add, (res) => commands(res.trim()));
 
     }));
 

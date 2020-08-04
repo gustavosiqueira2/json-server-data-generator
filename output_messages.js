@@ -54,7 +54,6 @@ module.exports = output_messages = {
   Entity \x1b[33m${entity}\x1b[0m context
   Properties: "name" "type"(string | number)
   ${propertiesString}
-  
   `,
   add_unrecognized_command: (res) => `
   \x1b[31mUnrecognized\x1b[0m command \x1b[1m\x1b[4madd ${res.split(' ')[1]}\x1b[0m
@@ -86,9 +85,14 @@ Do you want me to make a \x1b[1mbackup\x1b[0m of your entities? \x1b[1m(Y/n)\x1b
 `,
   help_commands: (command) => `
   \x1b[32m>\x1b[0m \x1b[1m${command}\x1b[0m`,
-  help_command_string: (commandsString) => `
-  \x1b[33mCommands list:\x1b[0m
-`+ commandsString + `
+  help_command_string: `
+  \x1b[33mCommands list:
+
+  \x1b[32m>\x1b[0m start
+  \x1b[32m>\x1b[0m add entity 'name' 'rows quantity'
+  \x1b[32m>\x1b[0m add property 'entity name'
+  \x1b[32m>\x1b[0m clear
+  \x1b[32m>\x1b[0m generate
 
   What you wanna do?
 

@@ -11,61 +11,89 @@ const checkFilesExist = (callback) => {
   fs.exists('entities.js', (exists) => !exists ? console.log(output_messages.missing_entities) : callback());
 }
 
-const params = {
-  fs,
-  readline,
-  output_messages,
-  boilerplate_entities,
-  checkFilesExist
-}
-
 const start = require('./functions/start');
 const clear = require('./functions/clear');
 const generate = require('./functions/generate');
 const help = require('./functions/help');
+const defaultCommandRes = require('./functions/default');
 
 const entity = require('./functions/add/entity');
 const property = require('./functions/add/property');
+const defaultAddCommandRes = require('./functions/add/default');
 
-const commands = {
 
-  s: () => commands['start'](),
-  start,
+const commands = (cmd) => {
 
-  add: (res) => {
-    checkFilesExist(() => this.add_commands.hasOwnProperty(res.trim().split(' ')[1]) ? this.add_commands[res.trim().split(' ')[1]](res.trim()) : this.add_commands['default'](res.trim()));
-  },
+  const [command, param] = cmd.split(' ');
 
-  c: () => commands['clear'](),
-  clear,
+  const params = {
+    fs,
+    readline,
+    output_messages,
+    boilerplate_entities,
+    checkFilesExist,
+    commands
+  }
 
-  g: () => commands['generate'](),
-  generate,
+  switch (command) {
 
-  h: () => commands['help'](),
-  help,
+    case 's':
+    case 'start': {
+      start(params)(cmd)
+      break
+    }
 
-  default: (res) => {
-    if (res.split(' ')[0] === 'add') commands['add'](res);
-    else readline.write(output_messages.unrecognized_command);
-    readline.close();
-  },
+    case 'c':
+    case 'clear': {
+      clear(params)(cmd)
+      break
+    }
 
-  add_commands: {
+    case 'g':
+    case 'generate': {
+      generate(params)(cmd)
+      break
+    }
 
-    e: (res) => this['entity'](res),
-    entity,
+    case 'h':
+    case 'help': {
+      help(params)(cmd)
+      break
+    }
 
-    p: (res) => this['property'](res),
-    property,
+    case 'a':
+    case 'add': {
 
-    default: (res) => {
-      if (res.split(' ')[1]) return console.log(output_messages.add_unrecognized_command(res));
-      readline.question(output_messages.add_commands, (res) => commands.hasOwnProperty(res.trim()) ? commands[res](res.trim()) : commands['default'](res.trim()));
+      checkFilesExist(() => {
+        switch (param) {
+  
+          case 'e':
+          case 'entity': {
+            entity(params)(cmd)
+            break
+          }  
+          case 'p':
+          case 'property': {
+            property(params)(cmd)
+            break
+          }  
+          default: {
+            defaultAddCommandRes(params)(cmd)
+            break
+          }
+  
+        }
+      })
+      
+      break
+    }
+
+    default: {
+      defaultCommandRes(params)(cmd)
+      break
     }
 
   }
-
 }
 
-readline.question(output_messages.presentation, (res) => commands.hasOwnProperty(res.trim()) ? commands[res.trim()](res.trim()) : commands['default'](res.trim()));
+readline.question(output_messages.presentation, (res) => commands(res.trim()));

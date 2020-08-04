@@ -1,10 +1,10 @@
-module.exports = ({ fs, output_messages, add_commands, boilerplate_entities }) => (res) => {
+module.exports = ({ fs, output_messages, boilerplate_entities, commands }) => (res) => {
 
   // Check if params are correct
   if (res.split(' ').length !== 4) return console.log(output_messages.add_entity_missing_parameters);
 
   const [, , entity, quantity] = res.split(' ');
-  const entities = require('./entities');
+  const entities = require('../../entities');
 
   // If quantity is not a number
   if (isNaN(Number(quantity))) return console.log(quantity + ' is not a number!');
@@ -19,7 +19,7 @@ module.exports = ({ fs, output_messages, add_commands, boilerplate_entities }) =
   fs.writeFile('entities.js', boilerplate_entities(entities), (err) => {
     if (err) return console.log(err);
 
-    add_commands['property']('add property ' + entity);
+    commands('add property ' + entity);
   });
 
 }
