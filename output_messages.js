@@ -30,11 +30,10 @@ module.exports = output_messages = {
   \x1b[31mData Generator isn't started yet!\x1b[0m
   please run start to create the boilerplate code to start use data-generator
 
-  missing entities.js file!
-`,
+  missing entities.js file!`,
   unrecognized_command: `
   \x1b[31mUnrecognized\x1b[0m command
-  type  \x1b[1m\x1b[4mhelp\x1b[0m, if you wanna see the list of the commands
+  type \x1b[1m\x1b[4mhelp\x1b[0m, if you wanna see the list of the commands
 `,
   add_entity_missing_parameters: `
   \x1b[31mMiss parameters\x1b[0m in command
@@ -52,7 +51,7 @@ module.exports = output_messages = {
   entity_doesnt_exist: `
   Entity Doesn't exist`,
   add_properties: (entity, propertiesString) => `
-  Entity ${entity} context
+  Entity \x1b[33m${entity}\x1b[0m context
   Properties: "name" "type"(string | number)
   ${propertiesString}
   

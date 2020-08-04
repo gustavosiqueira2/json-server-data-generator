@@ -17,13 +17,14 @@
 
 ## 🔨 Actual State
 
-- Generate Boilerplate ✔️
+- Generate Entities Boilerplate ✔️
 - Manualy add Entities and it Properties ✔️
 - Generate data ✔️
 - Ready to use! (with CLI but manualy too) ✔️
 - Clear (creating backup for default) ✔️
 - Add Enties through the CLI ✔️
 - Add Properties through the CLI ❌🔨
+- Edit/Remove Properties through the CLI ❌
 - Up to NPM ❌
 - Random types generators ❌
 - IA To link generation name with the property name! ❌
@@ -85,6 +86,21 @@
   `
 
 ---
+
+##  >_ comands
+
+
+| Command      | Usage                                     | Short | About                                  |
+|--------------|-------------------------------------------|-------|----------------------------------------|
+| Start        | jsdg start                                |   s   |   Create the file with your entities   |
+| Clear        | jsdg clear                                |   c   | Clear entities files (generate backup) |
+| Generate     | jsdg generate                             |   g   |  Generate data based on Entities File  |
+| Add Entity   | jsdg add entity "name" "quantity of rows" | add e |              Add a entity              |
+| Add Property | jsdg add property "entity name"           | add p |       Add properties to an entity      |
+
+---
+
+<br>
 
 ## 😉 Contributing
 
