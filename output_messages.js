@@ -38,7 +38,14 @@ module.exports = output_messages = {
   \x1b[31mMiss parameters\x1b[0m in command
 
   \x1b[1mAdd property command\x1b[0m: add property \x1b[1m'entity name'\x1b[0m
-  \x1b[32mExample:\x1b[0m \x1b[1madd property User \x1b[0m`,
+  \x1b[32mExample:\x1b[0m \x1b[1madd property User \x1b[0m
+  
+  `,
+  add_property_finish: `  add properties finished
+  `,
+  add_property_miss_type: `
+  \x1b[31mType Error\x1b[0m, property must be (string | number | text)
+`,
   entity_already_exist: `
   Entity Alreadt exist
 `,
@@ -46,7 +53,8 @@ module.exports = output_messages = {
   Entity Doesn't exist`,
   add_properties: (entity, propertiesString) => `
   Entity \x1b[33m${entity}\x1b[0m context
-  Properties: "name" "type"(string | number)
+    
+  Properties: "name" "type" (string | number | text)
   ${propertiesString}
   `,
   add_property: (entity) => `  ${entity}

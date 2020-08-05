@@ -1,20 +1,24 @@
-module.exports = ({ readline, output_messages }) => () => {
+module.exports = ({ readline, output_messages, checkFilesExist }) => () => {
 
-  const entities = require(process.cwd() + '/entities');
+  checkFilesExist(() => {
 
-  readline.write(output_messages.entities)
+    const entities = require(process.cwd() + '/entities');
 
-  // Run in each entity
-  Object.entries(entities).forEach(([name, properties]) => {
+    readline.write(output_messages.entities)
 
-    // Create the string with the properties
-    const entityProperties = Object.entries(properties.obj).map((p) => '   ' + p.join(': ')).join('\n')
+    // Run in each entity
+    Object.entries(entities).forEach(([name, properties]) => {
 
-    // Print the Entity and the properties
-    readline.write(output_messages.entity_properties(name, entityProperties))
+      // Create the string with the properties
+      const entityProperties = Object.entries(properties.obj).map((p) => '   ' + p.join(': ')).join('\n')
+
+      // Print the Entity and the properties
+      readline.write(output_messages.entity_properties(name, entityProperties))
+
+    })
+
+    readline.close()
 
   })
-
-  readline.close()
 
 }

@@ -3,16 +3,17 @@ module.exports = ({ fs, output_messages, readline, boilerplate_entities, command
   const [, , entity, added] = res.split(' ')
 
   // Check if params are correct
-  if (!entity) return console.log(output_messages.add_property_missing_parameters)
+  if (!entity) return readline.question(output_messages.add_property_missing_parameters, (res) => commands(res))
 
   // Check if param is added (used to do the recursive addtion of the properties)
-  if (added && added !== 'added') return console.log(output_messages.add_property_missing_parameters)
+  if (added && added !== 'added') return readline.question(output_messages.add_property_missing_parameters, (res) => commands(res))
 
   const entities = require(process.cwd() + '/entities')
 
   // If entity already exist in entities
   if (!entities.hasOwnProperty(entity)) return console.log(output_messages.entity_doesnt_exist)
 
+  // Generate the string
   let propertiesString = '';
   let propertyString = '';
 
@@ -28,16 +29,27 @@ module.exports = ({ fs, output_messages, readline, boilerplate_entities, command
 
         const [name, type] = res.split(' ')
 
-        if (!name || !type) return console.log('erro miss param')
+        // Finish if user send nothing
+        if (!name || !type) {
+          readline.write(output_messages.add_property_finish)
+          return readline.close()
+        }
 
-        if (type !== 'string' && type !== 'number') return console.log('type error, property must be string or number')
+        // Check Type Errors
+        if (type !== 'string' && type !== 'number' && type !== 'text') {
+          readline.write(output_messages.add_property_miss_type)
+          return commands('add property ' + entity)
+        }
 
+        // Add properties
         entities[entity].obj[name] = type
 
+        // Update File
         fs.writeFile('entities.js', boilerplate_entities(entities), (err) => {
 
           if (err) return console.log(err)
 
+          // Ask for next properties (recursive)
           commands('add property ' + entity + ' added')
 
         });

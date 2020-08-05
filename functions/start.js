@@ -10,7 +10,7 @@ module.exports = ({ fs, readline, output_messages, boilerplate_entities, command
     // Creating the boilerplate entities file
     fs.writeFile('entities.js', boilerplate_entities(), () => {
 
-      readline.write(output_messages.boilerplate_starterd)
+      readline.write(output_messages.boilerplate_started)
 
       readline.question(output_messages.run_add, (res) => commands(res.trim()))
 
