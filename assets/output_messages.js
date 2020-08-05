@@ -2,10 +2,10 @@ module.exports = output_messages = {
 
   presentation: `
   \x1b[34mwelcome to 
-  ${require('./package.json').name}\x1b[0m
+  ${require('../package.json').name}\x1b[0m
 
   \x1b[1mWhat you wanna do? (start, add, help)\x1b[0m
-  Actual version ${require('./package.json').version}
+  Actual version ${require('../package.json').version}
   
 `,
   boilerplate_started: `
@@ -44,7 +44,7 @@ module.exports = output_messages = {
   add_property_finish: `  add properties finished
   `,
   add_property_miss_type: `
-  \x1b[31mType Error\x1b[0m, property must be (string | number | text)
+  \x1b[31mType Error\x1b[0m, property must be (string | name | number | text)
 `,
   entity_already_exist: `
   Entity Alreadt exist
@@ -54,7 +54,7 @@ module.exports = output_messages = {
   add_properties: (entity, propertiesString) => `
   Entity \x1b[33m${entity}\x1b[0m context
     
-  Properties: "name" "type" (string | number | text)
+  Properties: "name" "type" (string | name | number | text)
   ${propertiesString}
   `,
   add_property: (entity) => `  ${entity}

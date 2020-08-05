@@ -36,7 +36,7 @@ module.exports = ({ fs, output_messages, readline, boilerplate_entities, command
         }
 
         // Check Type Errors
-        if (type !== 'string' && type !== 'number' && type !== 'text') {
+        if (type !== 'string' && type !== 'number' && type !== 'text' && type !== 'name') {
           readline.write(output_messages.add_property_miss_type)
           return commands('add property ' + entity)
         }

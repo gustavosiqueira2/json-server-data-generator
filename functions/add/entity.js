@@ -13,7 +13,7 @@ module.exports = ({ fs, output_messages, boilerplate_entities, commands }) => (r
   if (entities.hasOwnProperty(entity)) return console.log(output_messages.entity_already_exist)
 
   // Add entity to entities
-  entities[entity] = { array: [], quantity, obj: {} }
+  entities[entity] = { array: [], quantity, obj: { id: 'number' } }
 
   // Update File
   fs.writeFile('entities.js', boilerplate_entities(entities), (err) => {

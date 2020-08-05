@@ -5,9 +5,9 @@ const readline = readlineimport.createInterface({ input: process.stdin, output: 
 
 const fs = require('fs')
 
-const output_messages = require('./output_messages')
+const output_messages = require('./assets/output_messages')
 
-const boilerplate_entities = require('./boilerplate_entities')
+const boilerplate_entities = require('./assets/boilerplate_entities')
 
 const checkFilesExist = (callback) => fs.exists('entities.js', (exists) => {
 
