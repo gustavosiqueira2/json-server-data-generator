@@ -49,6 +49,8 @@ module.exports = output_messages = {
   Properties: "name" "type"(string | number)
   ${propertiesString}
   `,
+  add_property: (entity) => `  ${entity}
+  `,
   add_unrecognized_command: (res) => `
   \x1b[31mUnrecognized\x1b[0m command \x1b[1m\x1b[4madd ${res.split(' ')[1]}\x1b[0m
   Add commands:
