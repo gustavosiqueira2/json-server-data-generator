@@ -2,10 +2,10 @@ module.exports = output_messages = {
 
   presentation: `
   \x1b[34mwelcome to 
-  json-server-data-generator\x1b[0m
+  ${require('./package.json').name}\x1b[0m
 
-  \x1b[1m\x1b[4mWhat you wanna do? (start, add, help)\x1b[0m
-  Actual version 1.0.2
+  \x1b[1mWhat you wanna do? (start, add, help)\x1b[0m
+  Actual version ${require('./package.json').version}
   
 `,
   boilerplate_started: `
