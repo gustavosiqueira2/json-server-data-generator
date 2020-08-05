@@ -4,7 +4,7 @@ module.exports = ({ fs, output_messages, boilerplate_entities, commands }) => (r
   if (res.split(' ').length !== 4) return console.log(output_messages.add_entity_missing_parameters)
 
   const [, , entity, quantity] = res.split(' ')
-  const entities = require('../../entities')
+  const entities = require(process.cwd() + '/entities')
 
   // If quantity is not a number
   if (isNaN(Number(quantity))) return console.log(quantity + ' is not a number!')

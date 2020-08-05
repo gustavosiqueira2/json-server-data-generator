@@ -1,7 +1,7 @@
 const fs = require('fs')
 
 // Carry the information to generate data and the data it self
-let database = require('./entities')
+let database = require(process.cwd() + '/entities')
 
 // Generate data for specific entity of the database
 function generateRows(clas, objectName) {

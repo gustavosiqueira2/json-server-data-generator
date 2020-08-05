@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 const readlineimport = require('readline')
 const readline = readlineimport.createInterface({ input: process.stdin, output: process.stdout })
 
@@ -7,9 +9,15 @@ const output_messages = require('./output_messages')
 
 const boilerplate_entities = require('./boilerplate_entities')
 
-const checkFilesExist = (callback) =>
-  fs.exists('entities.js', (exists) =>
-    !exists ? console.log(output_messages.missing_entities) : callback())
+const checkFilesExist = (callback) => fs.exists('entities.js', (exists) => {
+
+  if (exists) callback()
+  else {
+    readline.write(output_messages.missing_entities)
+    readline.close()
+  }
+
+})
 
 const start = require('./functions/start')
 const clear = require('./functions/clear')
@@ -65,6 +73,7 @@ const commands = (cmd) => {
     case 'add': {
 
       checkFilesExist(() => {
+
         switch (param) {
 
           case 'e':
@@ -83,6 +92,7 @@ const commands = (cmd) => {
           }
 
         }
+
       })
 
       break

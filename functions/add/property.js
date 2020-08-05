@@ -4,7 +4,7 @@ module.exports = ({ fs, output_messages, readline, boilerplate_entities, command
   if (res.split(' ').length !== 3) return console.log(output_messages.add_property_missing_parameters)
 
   const [, , entity] = res.split(' ')
-  const entities = require('../../entities')
+  const entities = require(process.cwd() + '/entities')
 
   // If entity already exist in entities
   if (!entities.hasOwnProperty(entity)) return console.log(output_messages.entity_doesnt_exist)

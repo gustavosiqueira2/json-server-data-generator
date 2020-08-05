@@ -6,6 +6,13 @@
   Create the data for your server!
 </h3>
 
+<div align='center'> 
+
+[![](https://badge.fury.io/js/json-server-data-generator.svg)](http://badge.fury.io/js/json-server-data-generator)
+
+</div>
+
+
 ---
 
 ## ⚡ Even Faster!
@@ -22,8 +29,8 @@
 - Add Enties and Properties through the CLI ✔️
 - Clear (creating backup for default) ✔️
 - Generate, create data for server ✔️
-- Up to NPM ❌🔨
-- Random types generators ❌
+- Up to NPM ✔️
+- Random types generators ❌🔨
 - Edit / Remove Properties through the CLI ❌
 - IA To link generation name with the property name! ❌
 
@@ -31,26 +38,26 @@
 
 ## 🔧 How to use
 
-      Working in progress, 
-      Actualy you can start and add entities and properties manualy,
-      and after it run the Generator!
+      npm i json-server-data-generator
+
+      jsdg
 
 - First start the project
 
   `
-    jsdg start
+    start
   `
 
 - Add your entities (the entity name need to be in singular)
 
   `
-    jsdg add entity 'entity name' 'quantity of rows you need'
+    add entity 'entity name' 'quantity of rows you need'
   `
 
 - Enter in entity scope (after add you will be on your entity scope)
 
   `
-    jsdg add property 'entity name' 
+    add property 'entity name' 
   `
 - add the properties 
 
@@ -65,16 +72,16 @@
       'property name' 'property type'  
     `
 
-  - add whatever you want and type finish to add it to your entity
+  - add whatever you want and after
 
     `
-      finish 
+      ctrl + c to exit
     `
 
 - Now you can generate the data!
 
   `
-    jsdg generate
+    generate
   `
 
 - Run Json-Server 💡
