@@ -97,11 +97,12 @@
 
 | Command      | Usage                                     | Short | About                                  |
 |--------------|-------------------------------------------|-------|----------------------------------------|
-| Start        | jsdg start                                |   s   |   Create the file with your entities   |
-| Clear        | jsdg clear                                |   c   | Clear entities files (generate backup) |
-| Generate     | jsdg generate                             |   g   |  Generate data based on Entities File  |
-| Add Entity   | jsdg add entity "name" "quantity of rows" | add e |              Add a entity              |
-| Add Property | jsdg add property "entity name"           | add p |       Add properties to an entity      |
+| start        | start                                     |   s   |   Create the file with your entities   |
+| clear        | clear                                     |   c   | Clear entities files (generate backup) |
+| generate     | generate                                  |   g   |  Generate data based on Entities File  |
+| add entity   | add entity "name" "quantity of rows"      | add e |              Add a entity              |
+| add property | add property "entity name"                | add p |       Add properties to an entity      |
+| entities     | entities                                  |   e   |         View your added entities       |
 
 ---
 

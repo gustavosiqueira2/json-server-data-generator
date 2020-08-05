@@ -79,6 +79,11 @@ Do you want me to make a \x1b[1mbackup\x1b[0m of your entities? \x1b[1m(Y/n)\x1b
 
   you can run \x1b[1mjson-server server.json\x1b[0m to up the server!
 `,
+  entities: `
+  \x1b[34mYour Entities\x1b[0m
+
+`,
+  entity_properties: (name, properties) => '  \x1b[33m' + name + '\x1b[0m: \n' + properties + '\n\n',
   help_commands: (command) => `
   \x1b[32m>\x1b[0m \x1b[1m${command}\x1b[0m`,
   help_command_string: `

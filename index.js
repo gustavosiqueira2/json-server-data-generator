@@ -22,11 +22,14 @@ const checkFilesExist = (callback) => fs.exists('entities.js', (exists) => {
 const start = require('./functions/start')
 const clear = require('./functions/clear')
 const generate = require('./functions/generate')
-const help = require('./functions/help')
-const defaultCommandRes = require('./functions/default')
+
+const entities = require('./functions/showEntities')
 
 const entity = require('./functions/add/entity')
 const property = require('./functions/add/property')
+
+const help = require('./functions/help')
+const defaultCommandRes = require('./functions/default')
 const defaultAddCommandRes = require('./functions/add/default')
 
 
@@ -66,6 +69,12 @@ const commands = (cmd) => {
     case 'h':
     case 'help': {
       help(params)(cmd)
+      break
+    }
+
+    case 'e':
+    case 'entities': {
+      entities(params)(cmd)
       break
     }
 
